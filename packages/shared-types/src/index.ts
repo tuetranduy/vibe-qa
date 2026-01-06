@@ -27,3 +27,15 @@ export interface ApiError {
     requestId: string;
   };
 }
+
+export interface ProfileResponse {
+  id: string;
+  email: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface UpdateProfileRequest {
+  name: string;
+}
