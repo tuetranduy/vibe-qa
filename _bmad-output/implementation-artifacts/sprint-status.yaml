@@ -1,0 +1,131 @@
+# generated: 2026-01-06
+# project: vibe-qa
+# project_key: vibe-qa
+# tracking_system: file-system
+# story_location: {project-root}/_bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-01-06
+project: vibe-qa
+project_key: vibe-qa
+tracking_system: file-system
+story_location: "{project-root}/_bmad-output/implementation-artifacts"
+
+development_status:
+  # Epic 1: Project Foundation & Authentication
+  epic-1: in-progress
+  1-1-initialize-turborepo-monorepo-structure: review
+  1-2-set-up-database-schema-and-prisma-orm: backlog
+  1-3-implement-user-registration-api: backlog
+  1-4-implement-user-login-with-jwt: backlog
+  1-5-implement-jwt-authentication-middleware: backlog
+  1-6-implement-user-profile-management: backlog
+  1-7-implement-user-logout: backlog
+  1-8-implement-basic-frontend-authentication-ui: backlog
+  1-9-implement-protected-routes-and-navigation: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: Test Configuration & Initiation
+  epic-2: backlog
+  2-1-create-test-run-database-schema: backlog
+  2-2-set-up-bullmq-job-queue-with-redis: backlog
+  2-3-implement-test-run-creation-api-with-suggested-prompts: backlog
+  2-4-implement-job-status-tracking-api: backlog
+  2-5-implement-test-configuration-ui: backlog
+  2-6-implement-test-run-list-and-detail-views: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: AI-Powered Discovery & Test Generation
+  epic-3: backlog
+  3-1-create-ai-client-package-structure-with-provider-abstraction: backlog
+  3-2-implement-openai-provider-integration: backlog
+  3-3-implement-anthropic-claude-provider-integration: backlog
+  3-4-implement-ai-provider-factory-with-fallback-logic: backlog
+  3-5-create-discovered-functionalities-database-schema: backlog
+  3-6-implement-web-scraping-and-spa-discovery-logic: backlog
+  3-7-implement-test-scenario-generation-worker-logic: backlog
+  3-8-display-discovered-functionalities-in-ui: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Test Execution & Real-Time Progress
+  epic-4: backlog
+  4-1-create-test-scenarios-database-schema: backlog
+  4-2-implement-websocket-server-for-real-time-updates: backlog
+  4-3-implement-test-scenario-review-and-modification-api: backlog
+  4-4-implement-playwright-test-execution-engine: backlog
+  4-5-implement-screenshot-storage-schema-and-service: backlog
+  4-6-implement-test-execution-worker-with-concurrency-control: backlog
+  4-7-implement-test-cancellation: backlog
+  4-8-implement-real-time-progress-ui-with-websocket: backlog
+  4-9-implement-test-scenario-review-ui: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Test Results & Comprehensive Reporting
+  epic-5: backlog
+  5-1-create-test-report-database-schema: backlog
+  5-2-implement-report-generation-logic: backlog
+  5-3-implement-report-viewing-api: backlog
+  5-4-implement-report-sharing-with-public-links: backlog
+  5-5-implement-pdf-report-export: backlog
+  5-6-implement-screenshot-retrieval-api: backlog
+  5-7-implement-test-history-search-and-filtering: backlog
+  5-8-implement-report-deletion: backlog
+  5-9-implement-report-display-ui: backlog
+  epic-5-retrospective: optional
+
+  # Epic 6: Screenshot Management & Data Lifecycle
+  epic-6: backlog
+  6-1-implement-screenshot-expiration-cron-job: backlog
+  6-2-implement-pii-detection-and-sanitization: backlog
+  6-3-implement-storage-monitoring-and-alerts: backlog
+  epic-6-retrospective: optional
+
+  # Epic 7: System Resilience & Quality Assurance
+  epic-7: backlog
+  7-1-implement-rate-limiting-middleware: backlog
+  7-2-implement-test-execution-timeout-enforcement: backlog
+  7-3-implement-concurrent-execution-limits: backlog
+  7-4-implement-ai-quality-validation: backlog
+  7-5-implement-flaky-test-detection: backlog
+  epic-7-retrospective: optional
+
+  # Epic 8: Monitoring, Observability & Operations
+  epic-8: backlog
+  8-1-implement-health-check-endpoints: backlog
+  8-2-implement-application-metrics-collection: backlog
+  8-3-implement-ai-provider-performance-monitoring: backlog
+  8-4-implement-job-queue-monitoring: backlog
+  8-5-implement-centralized-logging: backlog
+  8-6-implement-critical-failure-alerting: backlog
+  8-7-implement-swagger-openapi-documentation: backlog
+  8-8-implement-database-migrations-and-backup-strategy: backlog
+  8-9-implement-zero-downtime-deployment-support: backlog
+  epic-8-retrospective: optional
