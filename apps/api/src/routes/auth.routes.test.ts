@@ -352,3 +352,88 @@ describe('POST /api/v1/auth/login', () => {
     expect(responseStr).not.toContain(hashedPassword);
   });
 });
+
+describe('POST /api/v1/auth/logout', () => {
+  it('should logout successfully with valid token', async () => {
+    const user = await prisma.user.create({
+      data: {
+        email: 'logout-test@example.com',
+        password: await hashPassword('Test123!@#'),
+        name: 'Logout Test User',
+      },
+    });
+
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET || 'test-secret',
+      { expiresIn: '7d' }
+    );
+
+    const response = await request(app)
+      .post('/api/v1/auth/logout')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.data).toBeDefined();
+    expect(response.body.data.message).toBe('Logout successful');
+    expect(response.body.meta).toBeDefined();
+    expect(response.body.meta.requestId).toBeDefined();
+    expect(response.body.meta.timestamp).toBeDefined();
+  });
+
+  it('should return 401 without authentication token', async () => {
+    const response = await request(app)
+      .post('/api/v1/auth/logout');
+
+    expect(response.status).toBe(401);
+    expect(response.body.error).toBeDefined();
+    expect(response.body.error.code).toBe('UNAUTHORIZED');
+    expect(response.body.error.message).toBe('Missing authentication token');
+    expect(response.body.meta.requestId).toBeDefined();
+  });
+
+  it('should return 401 with invalid token', async () => {
+    const response = await request(app)
+      .post('/api/v1/auth/logout')
+      .set('Authorization', 'Bearer invalid-token');
+
+    expect(response.status).toBe(401);
+    expect(response.body.error).toBeDefined();
+    expect(response.body.error.code).toBe('UNAUTHORIZED');
+    expect(response.body.meta.requestId).toBeDefined();
+  });
+
+  it('should return 401 with expired token', async () => {
+    const user = await prisma.user.create({
+      data: {
+        email: 'expired-test@example.com',
+        password: await hashPassword('Test123!@#'),
+        name: 'Expired Test User',
+      },
+    });
+
+    const expiredToken = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET || 'test-secret',
+      { expiresIn: '-1s' }
+    );
+
+    const response = await request(app)
+      .post('/api/v1/auth/logout')
+      .set('Authorization', `Bearer ${expiredToken}`);
+
+    expect(response.status).toBe(401);
+    expect(response.body.error).toBeDefined();
+    expect(response.body.error.code).toBe('UNAUTHORIZED');
+  });
+
+  it('should return 401 with malformed authorization header', async () => {
+    const response = await request(app)
+      .post('/api/v1/auth/logout')
+      .set('Authorization', 'InvalidFormat token');
+
+    expect(response.status).toBe(401);
+    expect(response.body.error.code).toBe('UNAUTHORIZED');
+    expect(response.body.error.message).toBe('Invalid authorization format');
+  });
+});

@@ -3,6 +3,7 @@ import { prisma } from '@vibe-qa/database';
 import { registerSchema, loginSchema } from '../validation/auth.schema';
 import { hashPassword } from '../utils/password';
 import { generateToken } from '../utils/jwt';
+import { authMiddleware } from '../middleware/auth.middleware';
 import bcrypt from 'bcrypt';
 
 export const authRouter = Router();
@@ -97,6 +98,24 @@ authRouter.post('/login', async (req: Request, res: Response, next: NextFunction
       },
       meta: {
         requestId: (req as any).id || 'unknown',
+        timestamp: new Date().toISOString(),
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+authRouter.post('/logout', authMiddleware, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const requestId = (req as any).id || 'unknown';
+    
+    res.status(200).json({
+      data: {
+        message: 'Logout successful',
+      },
+      meta: {
+        requestId,
         timestamp: new Date().toISOString(),
       },
     });
